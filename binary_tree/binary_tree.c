@@ -95,9 +95,18 @@ BinaryQueue* createBinaryQueue() {
     return queue;
 }
 
+BinaryLLNode* createBinaryLLNode(BinaryNode* val) {
+    BinaryLLNode* node = malloc(sizeof(BinaryLLNode));
+
+    node->val = val;
+    node->next = NULL;
+    node->prev = NULL;
+
+    return node;
+}
+
 void qpush(BinaryQueue* queue, BinaryNode* node) {
-    BinaryLLNode* entry = malloc(sizeof(BinaryLLNode));
-    entry->val = node;
+    BinaryLLNode* entry = createBinaryLLNode(node);
 
     if (queue->size > 0) {
         entry->next = queue->back;
@@ -334,6 +343,9 @@ BinaryNode* deserializeBinaryTree(char* filename) {
         }
     }
 
+    freeQueue(q);
+    fclose(fp);
+
     return root;
 }
 
@@ -379,6 +391,8 @@ void printBinaryTree(BinaryNode* root) {
 
         printf("\n");
     }
+
+    freeQueue(q);
 }
 
 int main() {
