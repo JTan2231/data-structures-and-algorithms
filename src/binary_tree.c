@@ -1,11 +1,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-
-typedef struct BinaryNode BinaryNode;
-typedef struct BinaryStack BinaryStack;
-typedef struct BinaryLLNode BinaryLLNode;
-typedef struct BinaryQueue BinaryQueue;
+#include <binary_tree.h>
 
 struct BinaryNode {
     int val;
@@ -13,7 +9,6 @@ struct BinaryNode {
     BinaryNode* right;
 };
 
-// move extraneous data structures to another file
 struct BinaryStack {
     BinaryNode** stack;
     int size;
@@ -393,26 +388,4 @@ void printBinaryTree(BinaryNode* root) {
     }
 
     freeQueue(q);
-}
-
-int main() {
-    BinaryNode* node = createNode(5);
-    node->left = createNode(10);
-    node->right = createNode(15);
-
-    node->left->left = createNode(22);
-    node->right->left = createNode(36);
-    node->left->left->right = createNode(43);
-
-    printBinaryTree(node);
-
-    char filename[] = "tree.btr";
-
-    serializeBinaryTree(filename, node);
-
-    printf("DESERIALIZED:\n");
-    BinaryNode* root = deserializeBinaryTree(filename);
-    printBinaryTree(root);
-
-    return 0;
 }
